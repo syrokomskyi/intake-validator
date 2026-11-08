@@ -1,0 +1,5 @@
+# Floors track the published versions the standalone package must work against.
+# werkstatt-shared 1.1.0 is the first release exporting media/sniff-media-type (RFC-1540).
+overrides:
+  "@warpgogol/werkstatt-shared": ^1.1.0
+  "@warpgogol/pbp": ^1.0.0

@@ -31,12 +31,12 @@
     "typecheck": "pnpm exec tsc -p tsconfig.json --noEmit",
     "build": "pnpm exec tsc -p tsconfig.json --noEmit",
     "build:check": "pnpm exec tsc -p tsconfig.json --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@warpgogol/pbp": "workspace:*",
-    "@warpgogol/werkstatt-shared": "workspace:*",
+    "@warpgogol/pbp": "^1.0.0",
+    "@warpgogol/werkstatt-shared": "^1.1.1",
     "tsx": "^4.23.13",
     "yaml": "^2.9.1"
   },
@@ -50,5 +50,11 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": ["src", "bin", "data", "tsconfig.json"]
+  "files": [
+    "src",
+    "bin",
+    "data",
+    "tsconfig.json"
+  ],
+  "packageManager": "pnpm@11.10.0"
 }
