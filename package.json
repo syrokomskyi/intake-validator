@@ -1,0 +1,54 @@
+{
+  "name": "@warpgogol/intake-validator",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "description": "Published consumer validator for werkstatt:intake/v2 hand-over bundles (INTAKE-01…34) — the rules werkstatt itself runs (RFC-1540, DNA-115).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syrokomskyi/intake-validator.git"
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "intake-validate": "./bin/intake-validate.mjs"
+  },
+  "forge": {
+    "conformanceValidator": true
+  },
+  "scripts": {
+    "lint": "pnpm exec eslint \"src/**/*.ts\"",
+    "typecheck": "pnpm exec tsc -p tsconfig.json --noEmit",
+    "build": "pnpm exec tsc -p tsconfig.json --noEmit",
+    "build:check": "pnpm exec tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@warpgogol/pbp": "workspace:*",
+    "@warpgogol/werkstatt-shared": "workspace:*",
+    "tsx": "^4.23.13",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.1",
+    "eslint": "^10.10.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "8.70.0",
+    "vitest": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": ["src", "bin", "data", "tsconfig.json"]
+}

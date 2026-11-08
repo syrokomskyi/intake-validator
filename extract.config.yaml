@@ -1,0 +1,56 @@
+forgePlugin: false
+# extract.config.yaml — repo-extract standalone package export for @warpgogol/intake-validator
+# Extracts packages/intake-validator from the werkstatt monorepo into a standalone public repo.
+# RFC-1540: the published werkstatt:intake/v2 consumer validator producers pin (DNA-115).
+
+projectDir: packages/intake-validator
+destName: intake-validator
+standalone: true
+
+workspacePrefixes:
+  - "@warpgogol/"
+stripScopes:
+  - "@warpgogol/"
+  - "@syrokomskyi/"
+preservePackages:
+  - "@warpgogol/intake-validator"
+  - "@warpgogol/werkstatt-shared"
+  - "@warpgogol/pbp"
+packageManager: pnpm
+
+ci:
+  provider: github-actions
+  publish: true
+  nodeVersion: 24
+  provenance: true
+
+ignoreDirs:
+  - .turbo
+  - .agents
+  - node_modules
+  - tmp-*
+
+excludePathSegments:
+  - .npmrc
+  - pnpm-lock.yaml
+  # parity.test.ts reads werkstatt-engine fixture bundles and the werkstatt-site
+  # family export from the monorepo — never shipped standalone.
+  - parity.test.ts
+
+postProcess:
+  - action: delete
+    path: AGENTS.md
+  - action: copy
+    from: packages/intake-validator/AGENTS.standalone.md
+    to: AGENTS.md
+  - action: delete
+    path: pnpm-lock.yaml
+  - action: copy
+    from: packages/intake-validator/pnpm-workspace.override.yaml
+    to: pnpm-workspace.yaml
+
+git:
+  remote: git@github.com:syrokomskyi/intake-validator.git
+  autoPush: true
+  # Never force-push; non-fast-forward reconciles via fetch + merge -s ours.
+  autoReconcile: true
